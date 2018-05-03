@@ -6,7 +6,7 @@ import { TodoStore, RouterStore } from 'app/store';
 import Head from 'app/component/Head';
 import Footer from 'app/component/Footer';
 import TodoLists from 'app/component/TodoLists';
-import './style.scss';
+import * as styles from './style.scss';
 
 interface TodoAppProps extends RouteComponentProps<any> {
   [STORE_ROUTER]?:RouterStore;
@@ -27,6 +27,23 @@ export default class TodoApp  extends React.Component<TodoAppProps,TodoAppState>
       filter: TodoFilter.ALL,
     }
   }
+  componentDidMount(){
+    this.checkLocationChange();
+  }
+
+  componentWillReceiveProps(nextProps:TodoAppProps,nextContext:any){
+    this.checkLocationChange();
+  }
+
+  checkLocationChange(){
+    const router = this.props[STORE_ROUTER] as RouterStore;
+    const filter = Object.keys(TODO_FILTER_LOCATION_HASH)
+    .map((item) => Number(item) as TodoFilter)
+    .find((filter) => TODO_FILTER_LOCATION_HASH[filter] === router.location.hash)
+    this.setState({
+      filter:filter
+    })
+  }
 
   getFiltered(filter:TodoFilter){
     const todoStore = this.props[STORE_TODO] as TodoStore;
@@ -38,7 +55,7 @@ export default class TodoApp  extends React.Component<TodoAppProps,TodoAppState>
       default :
         return todoStore.todos
     }
-  }
+  }  
 
   private handleFilter = (filter:TodoFilter) => {
     const router =  this.props[STORE_ROUTER] as RouterStore;
@@ -64,9 +81,14 @@ export default class TodoApp  extends React.Component<TodoAppProps,TodoAppState>
         ></Footer>
     )
     return (
-      <div className="normal">
-        <Head addTodo={ () => {} }></Head>
-        <TodoLists todos={ filteredTodos }></TodoLists>
+      <div className={ styles.normal }>
+        <Head addTodo={ todoStore.addTodo }></Head>
+        <TodoLists 
+          todos={ filteredTodos }
+          deleteTodo={ todoStore.deleteTodo }
+          editTodo={ todoStore.editTodo }
+          completeAll={ todoStore.complateAll }
+          />
         { footer }
         { children }
       </div>

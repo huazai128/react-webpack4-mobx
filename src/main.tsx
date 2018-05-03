@@ -5,6 +5,8 @@ import { createBrowserHistory } from 'history';
 import App from 'app';
 import { creactStore } from "app/store";
 import { TodoModel } from 'app/models';
+import { Router, withRouter } from 'react-router-dom';
+import Root from 'app/component/Root';
 
 const defaultTodos = [
   new TodoModel('Use Mobx'),
@@ -14,9 +16,16 @@ const defaultTodos = [
 const history = createBrowserHistory();
 const rootStore = creactStore(history,defaultTodos);
 
+const Wrap = withRouter((props) => <App {...props} />)
+
 ReactDOM.render(
   <Provider {...rootStore}>
-    <App></App>
+    <Root>
+      <Router history={ history }>
+        <Wrap></Wrap>
+      </Router>
+    </Root>
+    
   </Provider>
  ,
   document.getElementById('root')
