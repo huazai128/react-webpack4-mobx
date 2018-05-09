@@ -4,8 +4,6 @@ import merge from 'webpack-merge'
 import ConfigWebpack from './webpack.config'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-const isProduction = process.argv.indexOf('-p') >= 0
-
 const webpackDev = merge(ConfigWebpack,{
 	mode:'development', 
 	output:{

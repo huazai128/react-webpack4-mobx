@@ -1,3 +1,4 @@
+import "./style.less"
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
@@ -7,6 +8,7 @@ import { creactStore } from "app/store";
 import { TodoModel } from 'app/models';
 import { Router, withRouter } from 'react-router-dom';
 import Root from 'app/component/Root';
+// import 'antd/dist/antd.css'
 
 const defaultTodos = [
   new TodoModel('Use Mobx'),

@@ -8,6 +8,11 @@ const isProduction = process.argv.indexOf('-p') >= 0
 
 const ConfigWebpack =  {
 	entry:{
+		vendor: [
+			'babel-polyfill',
+			// 'react',
+			// 'react-dom',
+		],
 		main:[
 			path.join(__dirname,'../src/main.tsx')
 		],
@@ -24,8 +29,7 @@ const ConfigWebpack =  {
 		rules:[
 			{
 				test: /\.(tsx|ts)?$/,
-				use: 'ts-loader',
-				exclude:/node_modules/,
+				use: ['babel-loader','ts-loader'],
 			},{
 				test: /\.js|\.jsx$/,
 				use: {
@@ -81,8 +85,24 @@ const ConfigWebpack =  {
 				use: [
 					!isProduction ? 'style-loader' : MiniCssExtractPlugin.loader,
 					'css-loader',
-					'scss-loader',
-					'postcss-loader',
+					{
+						loader: 'postcss-loader',
+						options: {
+							sourceMap: true,
+							plugins: [
+								// autoprefixer, pxtorem({
+								// 	rootValue: 100,
+								// 	minPixelValue: 3,
+								// 	propWhiteList: [],
+								// })
+								autoprefixer
+							]
+						},
+					},
+					{
+						loader: 'less-loader',
+						options: { javascriptEnabled: true }
+					},
 				],
 			},
 		]

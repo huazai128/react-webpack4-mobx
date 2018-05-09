@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classnames from 'classnames';
+import classnames from 'classnames';
 import * as styles from './style.scss';
 
 export interface TodoTextInputProps{
@@ -7,7 +7,7 @@ export interface TodoTextInputProps{
   placeholder?:string;
   newTodo?:boolean;
   editing?:boolean;
-  onSave:(text:string) => any;
+  onSave:(text:string,isBlur?:boolean) => any;
   type?:string;
 }
 
@@ -26,7 +26,7 @@ export default class TodoTextInput extends React.Component<TodoTextInputProps,To
   private handleBlur = (e:any) => {
     const text = e.target.value.trim();
     if(!this.props.newTodo){
-      this.props.onSave(text);
+      this.props.onSave(text,true);
     }
   }
 

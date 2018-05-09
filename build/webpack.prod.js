@@ -9,10 +9,9 @@ import OptimizeCSSPlugin from 'optimize-css-assets-webpack-plugin' // 抽离css
 import CompressionPlugin from 'compression-webpack-plugin'
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
-
 const isProduction = process.argv.indexOf('-p') >= 0
 
-const webpackDev = merge(ConfigWebpack,{
+const webpackProd = merge(ConfigWebpack,{
 	mode:'production',
 	output:{
 		filename: 'core/[name].[chunkhash].js',
@@ -53,4 +52,4 @@ const webpackDev = merge(ConfigWebpack,{
 		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/), 
 	]
 })
-export default webpackDev
+export default webpackProd

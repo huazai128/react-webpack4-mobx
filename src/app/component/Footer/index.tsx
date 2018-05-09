@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as style from './style.scss';
-import * as classnames from 'classnames';
+import classnames from 'classnames';
 import { TodoFilter,TODO_FILTER_TITLES,TODO_FILTER_TYPES } from 'app/constans';
 
 interface FooterProps {

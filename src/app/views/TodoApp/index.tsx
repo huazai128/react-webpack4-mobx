@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { STORE_ROUTER,STORE_TODO,TODO_FILTER_LOCATION_HASH,TodoFilter} from 'app/constans';
-import { inject,observer } from 'mobx-react';
+import { inject,observer, } from 'mobx-react';
 import { RouteComponentProps } from 'react-router-dom';
 import { TodoStore, RouterStore } from 'app/store';
 import Head from 'app/component/Head';
