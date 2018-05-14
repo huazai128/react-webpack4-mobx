@@ -9,6 +9,9 @@ export interface RootState{
 }
 
 export default class Root extends React.Component<RootProps,RootState>{
+  static defaultProps = {
+    
+  }
   constructor(props:RootProps){
     super(props);
     this.state = {

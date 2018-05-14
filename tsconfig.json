@@ -22,7 +22,7 @@
     "baseUrl": "src",
     "paths": {
       "app/*":["./app/*"],
-      "assets/*":["./assets/*"]
+      "assets/*":["./assets/*"],
     }
   },
   "exclude": [

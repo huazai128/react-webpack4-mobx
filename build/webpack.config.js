@@ -5,6 +5,7 @@ import webpack from 'webpack'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 const isProduction = process.argv.indexOf('-p') >= 0
+import config from '../config'
 
 const ConfigWebpack =  {
 	entry:{
@@ -128,6 +129,12 @@ const ConfigWebpack =  {
 		new MiniCssExtractPlugin({ //  抽离css
 			filename: 'css/[name].[contenthash].css',
 			allChunks: true,
+		}),
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+				API: JSON.stringify(config.apiBase)
+			}
 		}),
 	]
 }
