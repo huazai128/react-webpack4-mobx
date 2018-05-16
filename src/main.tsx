@@ -26,7 +26,7 @@ ReactDOM.render(
         <Wrap></Wrap>
       </Router>
     </Root>
-    
+
   </Provider>
  ,
   document.getElementById('root')

@@ -7,7 +7,7 @@ export class TodoStore{
   }
 
   @observable public todos:Array<TodoModel>;
-  
+
   @computed
   get activeTodos(){
     return this.todos.filter((item) => !item.completed);
@@ -32,13 +32,13 @@ export class TodoStore{
   complateAll = ():void => {
     this.todos = this.todos.map((item) => ({ ...item,completed:true }));
   }
-  
+
   @action
   deleteTodo = (id:number):void => {
     this.todos = this.todos.filter((item) => Object.is(item.id, id) );
   }
 
-  @action 
+  @action
   editTodo = (id:number,data:Partial<TodoModel>):void => {
     this.todos = this.todos.map((item) => {
       if(Object.is(item.id, id)){

@@ -49,7 +49,7 @@ const webpackProd = merge(ConfigWebpack,{
 			threshold: 10240,
 			minRatio: 0.8,
 		}),
-		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/), 
+		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 	]
 })
 export default webpackProd

@@ -5,6 +5,7 @@ import { Table } from 'antd';
 import  './style.scss';
 
 interface ListsProps {
+  
 }
 interface ListsState {
   isInput:boolean;
@@ -45,12 +46,6 @@ export default class Lists extends React.Component<ListsProps,ListsState> {
       text:''
     }
   }
-  // private handleClick  = (e:React.SyntheticEvent<any>) => {
-  //   e.preventDefault();
-  //   this.setState({
-  //     isInput:true
-  //   })
-  // }
   handleBlur = (text:string,isBlur:boolean) => {
     if(isBlur){
       this.setState({
@@ -59,22 +54,7 @@ export default class Lists extends React.Component<ListsProps,ListsState> {
     }
     console.log(text);
   }
-  // <div className="lists">
-  //       { !isInput && (
-  //         <div className="item"  onClick={ this.handleClick }>{ text }</div>
-  //       ) }
-  //       {
-  //         isInput && (
-  //           <div className="input">
-  //         <TodoTextInput text={text} onSave={ this.handleBlur } type="text"  />
-  //       </div>
-  //         ) 
-  //       }
-  //     </div>
-
-  
   render() {
-    // const { isInput,text } = this.state;
     return (
       <Table dataSource={dataSource} columns={columns} />
       

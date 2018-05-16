@@ -55,7 +55,7 @@ export default class TodoApp  extends React.Component<TodoAppProps,TodoAppState>
       default :
         return todoStore.todos
     }
-  }  
+  }
 
   private handleFilter = (filter:TodoFilter) => {
     const router =  this.props[STORE_ROUTER] as RouterStore;
@@ -72,7 +72,7 @@ export default class TodoApp  extends React.Component<TodoAppProps,TodoAppState>
     const { children } = this.props;
     const filteredTodos = this.getFiltered(filter);
     const footer = todoStore.todos.length && (
-      <Footer 
+      <Footer
         selectedFilter={ filter }
         completedCount={ todoStore.completedTodos.length }
         activeCount={ todoStore.activeTodos.length }
@@ -83,7 +83,7 @@ export default class TodoApp  extends React.Component<TodoAppProps,TodoAppState>
     return (
       <div className={ styles.normal }>
         <Head addTodo={ todoStore.addTodo }></Head>
-        <TodoLists 
+        <TodoLists
           todos={ filteredTodos }
           deleteTodo={ todoStore.deleteTodo }
           editTodo={ todoStore.editTodo }

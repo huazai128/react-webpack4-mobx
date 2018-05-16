@@ -7,31 +7,37 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 const isProduction = process.argv.indexOf('-p') >= 0
 import config from '../config'
 
-const ConfigWebpack =  {
-	entry:{
+const arr = [
+
+]
+const ConfigWebpack = {
+	entry: {
 		vendor: [
 			'babel-polyfill',
 			// 'react',
 			// 'react-dom',
 		],
-		main:[
-			path.join(__dirname,'../src/main.tsx')
+		main: [
+			'react-hot-loader/patch',
+			'webpack-dev-server/client?http://0.0.0.0:' + config.port,
+			'webpack/hot/only-dev-server',
+			path.join(__dirname, '../src/main.tsx')
 		],
 	},
-	resolve:{
+	resolve: {
 		extensions: ['.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.ts', '.tsx', '.js', '.jsx', '.react.js'],
-		alias:{
-			'app':path.join(__dirname,'../src/app/'),
-			'assets':path.join(__dirname,'../src/assets/')
+		alias: {
+			'app': path.join(__dirname, '../src/app/'),
+			'assets': path.join(__dirname, '../src/assets/')
 		}
 	},
-	target:'web',
+	target: 'web',
 	module: {
-		rules:[
+		rules: [
 			{
 				test: /\.(tsx|ts)?$/,
-				use: ['babel-loader','ts-loader'],
-			},{
+				use: ['babel-loader', 'ts-loader'],
+			}, {
 				test: /\.js|\.jsx$/,
 				use: {
 					loader: 'babel-loader',
@@ -40,12 +46,12 @@ const ConfigWebpack =  {
 			},
 			{
 				test: /\.(eot|woff|woff2|ttf|png|jpe?g|jpg|gif|mp4|webm)(\?\S*)?$/,
-				loader:'file-loader',
+				loader: 'file-loader',
 				options: {
 					name: '[name:hash:6].[ext]',
 					publicPath: 'img/'
 				},
-				include: path.join(__dirname,'src'),
+				include: path.join(__dirname, 'src'),
 				exclude: /node_modules/,
 			},
 			{
@@ -108,7 +114,7 @@ const ConfigWebpack =  {
 			},
 		]
 	},
-	optimization:{
+	optimization: {
 		splitChunks: {
 			name: true,
 			cacheGroups: {
@@ -125,7 +131,7 @@ const ConfigWebpack =  {
 		},
 		runtimeChunk: true
 	},
-	plugins:[
+	plugins: [
 		new MiniCssExtractPlugin({ //  抽离css
 			filename: 'css/[name].[contenthash].css',
 			allChunks: true,

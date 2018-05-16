@@ -37,20 +37,14 @@ const codeMessage:any = {
 	505: 'http版本不支持该请求'
 }
 
-const showError = (error:any) => {
-	const { code } = error
-	const content = error.msg || errorCodeMessage[code]
-	return message.error(content);
-}
-
 axios.defaults.baseURL = API_URL;
-axios.defaults.timeout = 1000 * 60; // 请求超时
-
+axios.defaults.timeout = 1000 * 60;
 
 // 请求成功
 const handleSuccess = (res: AxiosResponse<any>) => {
   return of(res.data);
 }
+
 // 请求失败
 const handleError = (error:any): Observable<any> => {
   message.error(error.message,2);
@@ -62,6 +56,21 @@ export const get = (url:string, params = {}) => {
   return fromPromise(axios({
     method: "get",
     url,
+    params,
+  }))
+    .pipe(
+      switchMap((res:AxiosResponse<any>) => handleSuccess(res)),
+      retry(3),
+      catchError((error) => handleError(error))
+    )
+}
+
+// get请求
+export const post = (url:string,body:any, params = {}) => {
+  return fromPromise(axios({
+    method: "post",
+		url,
+		data:body,
     params,
   }))
     .pipe(

@@ -10,7 +10,7 @@ export class RouterStore extends BaseRouterStore {
     if (history) {
       this.history = syncHistoryWithStore(history, this);
     }
-  }  
+  }
 }
 
 export default RouterStore;

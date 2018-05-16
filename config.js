@@ -1,7 +1,6 @@
-
 const config = {
 	development: {
-		port: 8000,
+		port: 3000,
 		// apiBase: 'http://192.168.0.210:3721',
 		apiBase: 'https://sscsapi.fongwell.com',
 		oauth: {
@@ -36,6 +35,6 @@ if (process.env.NODE_ENV) {
 	}
 }
 
+console.log(envbuild)
 var toUse = config[envbuild]
-console.log('node环境:' + envbuild)
 module.exports = toUse
