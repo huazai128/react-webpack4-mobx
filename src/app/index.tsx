@@ -2,8 +2,10 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from 'app/views/User/login';
 import { LayoutComponent } from 'app/component/Layout';
+import { autobind } from 'core-decorators';
 import route from 'app/router';
 
+@autobind
 export default class App extends React.Component<any, any>{
 	constructor(props: any) {
 		super(props);
