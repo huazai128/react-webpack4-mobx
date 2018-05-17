@@ -2,34 +2,39 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from 'app/views/User/login';
 import { LayoutComponent } from 'app/component/Layout';
-import { autobind } from 'core-decorators';
+import { inject, observer } from 'mobx-react';
 import route from 'app/router';
-// import { TabLists } from 'app/component/Layout';
+import { TabLists } from 'app/component/Layout';
+import { STORE_HOME } from 'app/constans';
 
+export interface AppProps {
+	[key: string]: any;
+}
 
-export class GetTab extends React.Component<any,any>{
-	constructor(props:any){
+@observer
+export class GetTab extends React.Component<AppProps, any>{
+	constructor(props: AppProps) {
 		super(props);
 	}
-	componentDidMount(){
-		console.log("大大大大")
+	componentDidMount() {
+		const { store,tag } = this.props;
+		store.add(tag);
 	}
-	render():any {
+	render(): any {
 		return null;
 	}
 }
 
-@autobind
-export default class App extends React.Component<any, any>{
-	constructor(props: any) {
+@inject(STORE_HOME)
+@observer
+export default class App extends React.Component<AppProps, any>{
+	constructor(props: AppProps) {
 		super(props);
 		this.state = {
 			isLogin: true
 		}
 	}
-	componentWillReceiveProps(nextProps:any){
-
-	}
+	private home = this.props.home;
 	render() {
 		const { isLogin } = this.state;
 		const login = !isLogin && (<Route exact path="/login" component={Login} ></Route>);
@@ -38,19 +43,18 @@ export default class App extends React.Component<any, any>{
 				<div style={{ height: "100%", width: '100%' }}>
 					<LayoutComponent {...this.props} />
 					<div className="flex-g-1 flex-col">
-						{/* <TabLists /> */}
+						<TabLists { ...this.props } />
 					</div>
-				</div>
-			)
+				</div>)
 		}
 		return (
 			<div style={{ height: "100%" }}>
-				{ isLogin && <Layout /> }
+				{isLogin && <Layout />}
 				<Switch key="Switch">
 					{login}
 					{route.map((item, index) => (
 						<Route exact key={index} path={item.path} render={(props) => {
-							return <GetTab />
+							return <GetTab store={this.home} tag={{ ...item}}/>
 						}} ></Route>
 					))}
 				</Switch>

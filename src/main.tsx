@@ -16,7 +16,6 @@ const defaultTodos = [
 
 const history = createBrowserHistory();
 const rootStore = creactStore(history,defaultTodos);
-
 const Wrap = withRouter((props) => <App {...props} />)
 
 ReactDOM.render(

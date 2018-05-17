@@ -14,7 +14,7 @@ export class HomeStore{
     this.tabs = [...this.tabs,tab];
   }
 
-  @action 
+  @action
   remove = () => {
 
   }
