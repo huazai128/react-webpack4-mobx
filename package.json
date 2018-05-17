@@ -53,6 +53,7 @@
   "version": "1.0.0",
   "main": ".eslintrc.js",
   "dependencies": {
+    "@types/core-decorators": "^0.20.0",
     "antd": "^3.5.0",
     "axios": "^0.18.0",
     "classnames": "^2.2.5",

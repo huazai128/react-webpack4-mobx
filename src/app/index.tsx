@@ -4,6 +4,20 @@ import Login from 'app/views/User/login';
 import { LayoutComponent } from 'app/component/Layout';
 import { autobind } from 'core-decorators';
 import route from 'app/router';
+// import { TabLists } from 'app/component/Layout';
+
+
+export class GetTab extends React.Component<any,any>{
+	constructor(props:any){
+		super(props);
+	}
+	componentDidMount(){
+		console.log("大大大大")
+	}
+	render():any {
+		return null;
+	}
+}
 
 @autobind
 export default class App extends React.Component<any, any>{
@@ -13,6 +27,9 @@ export default class App extends React.Component<any, any>{
 			isLogin: true
 		}
 	}
+	componentWillReceiveProps(nextProps:any){
+
+	}
 	render() {
 		const { isLogin } = this.state;
 		const login = !isLogin && (<Route exact path="/login" component={Login} ></Route>);
@@ -21,7 +38,7 @@ export default class App extends React.Component<any, any>{
 				<div style={{ height: "100%", width: '100%' }}>
 					<LayoutComponent {...this.props} />
 					<div className="flex-g-1 flex-col">
-
+						{/* <TabLists /> */}
 					</div>
 				</div>
 			)
@@ -32,7 +49,9 @@ export default class App extends React.Component<any, any>{
 				<Switch key="Switch">
 					{login}
 					{route.map((item, index) => (
-						<Route exact key={index} path={item.path} component={item.Component} ></Route>
+						<Route exact key={index} path={item.path} render={(props) => {
+							return <GetTab />
+						}} ></Route>
 					))}
 				</Switch>
 			</div>

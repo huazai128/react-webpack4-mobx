@@ -9,3 +9,6 @@ export interface RouterModel<P> {
 	children?:RouterModel<P>[];
 }
 
+export interface TabModel{
+	path:string;
+}

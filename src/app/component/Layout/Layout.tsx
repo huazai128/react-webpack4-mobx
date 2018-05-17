@@ -1,20 +1,21 @@
 import * as React from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
-// import classnames from 'classnames';
+import { autobind } from 'core-decorators';
 import routes from 'app/router';
 import { RouterModel } from 'app/models';
 const SubMenu = Menu.SubMenu;
 const { Sider } = Layout;
 
 export interface LayoutProps{
-
+	[key:string]:any;
 }
 
 export interface LayoutState {
 	collapsed: boolean;
 }
 
+@autobind
 export class LayoutComponent extends React.Component<LayoutProps, LayoutState>{
 	constructor(props: any) {
 		super(props);
@@ -22,21 +23,21 @@ export class LayoutComponent extends React.Component<LayoutProps, LayoutState>{
 			collapsed: false
 		}
 	}
-	private onCollapse = () => {
+	private onCollapse () {
 		this.setState({
 			collapsed: !this.state.collapsed
 		})
 	}
-
 	render() {
 		const { collapsed } = this.state;
+		const { pathname } = this.props!.location;
 		return (
 			<Sider
 				width={180}
 				collapsible
 				collapsed={collapsed}
 				onCollapse={this.onCollapse}>
-				<Menu theme="dark" selectedKeys={['/']} mode="inline">
+				<Menu theme="dark" selectedKeys={[pathname]} mode="inline">
 					{routes.map((item: RouterModel<any>, index: number) => (
 						item.children ? (
 							<SubMenu key={item.name} title={<span><Icon type={item.icon} /><span>{item.name}</span></span>}>
