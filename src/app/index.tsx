@@ -40,7 +40,7 @@ export default class App extends React.Component<AppProps, any>{
 		const login = !isLogin && (<Route exact path="/login" component={Login} ></Route>);
 		const Layout = () => {
 			return (
-				<div style={{ height: "100%", width: '100%' }}>
+				<div style={{ height: "100%", width: '100%' }} className="flex">
 					<LayoutComponent {...this.props} />
 					<div className="flex-g-1 flex-col">
 						<TabLists { ...this.props } />

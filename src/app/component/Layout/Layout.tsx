@@ -37,7 +37,10 @@ export class LayoutComponent extends React.Component<LayoutProps, LayoutState>{
 				collapsible
 				collapsed={collapsed}
 				onCollapse={this.onCollapse}>
-				<Menu theme="dark" selectedKeys={[pathname]} mode="inline">
+				<Menu
+					theme="dark"
+					selectedKeys={[pathname]}
+					mode="inline">
 					{routes.map((item: RouterModel<any>, index: number) => (
 						item.children ? (
 							<SubMenu key={item.name} title={<span><Icon type={item.icon} /><span>{item.name}</span></span>}>

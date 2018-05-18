@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Tabs } from 'antd';
-import { RouterModel } from 'app/models';
 import { HomeStore } from 'app/store';
 import { observer } from 'mobx-react';
-// import { toJS } from 'mobx';
+import { History } from 'history';
+import { toJS } from 'mobx';
+import * as style from './style.less';
 const TabPane = Tabs.TabPane;
 
 interface TabListsProps {
@@ -11,38 +12,39 @@ interface TabListsProps {
 }
 
 interface TabListsState {
-	paths: RouterModel<any>[];
+
 }
 
 @observer
 export class TabLists extends React.Component<TabListsProps, TabListsState>{
+	private home = this.props.home as HomeStore;
 	constructor(props: TabListsProps) {
 		super(props);
-		this.state = {
-			paths: []
-		}
 	}
-	private home = this.props.store as HomeStore;
-	get pathname() {
+	get pathname(): History.Pathname {
 		return this.props.location.pathname;
 	}
-	get history() {
+	get history(): History {
 		return this.props.history;
 	}
 	render() {
-		console.log(this.home.tabs);
 		return (
 			<Tabs
 				hideAdd
-				style={{ height: "100%" }}
-				className="main-tags"
-				onChange={(key) => {}}
+				onChange={(key) => this.history.push(key)}
 				activeKey={this.pathname}
 				type="editable-card"
-				onEdit={() => { }}>
-				{/* {this.home.tabs.map((item) => (
-					<TabPane tab={ <span></span> } key={ item.path } >{item.name}</TabPane>
-				))} */}
+				onEdit={(key) => this.home.change(key, this.history.push)}>
+				{toJS(this.home.tabs).map(pane => {
+					const { Component } = pane;
+					return (
+						<TabPane tab={pane.name} key={pane.path}>
+							<div className={ style.cont }>
+								{Component ? <Component></Component> : <div>暂无内容</div>}
+							</div>
+						</TabPane>
+					)
+				})}
 			</Tabs>
 		)
 	}

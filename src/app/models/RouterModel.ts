@@ -1,12 +1,12 @@
 
 import * as React from 'react';
 
-export interface RouterModel<P> {
+export interface RouterModel<T> {
 	name: string;
 	icon?: string;
 	path: string;
-	Component: React.ComponentType<P>;
-	children?:RouterModel<P>[];
+	Component: React.ComponentType<T>;
+	children?:RouterModel<T>[];
 }
 
 export interface TabModel{

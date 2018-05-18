@@ -3,6 +3,6 @@ declare module '*.scss' {
   export = styles;
 }
 declare module '*.less' {
-  const styles: any;
-  export = styles;
+  const style: any;
+  export = style;
 }
