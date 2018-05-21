@@ -7,8 +7,5 @@ export interface RouterModel<T> {
 	path: string;
 	Component: React.ComponentType<T>;
 	children?:RouterModel<T>[];
-}
-
-export interface TabModel{
-	path:string;
+	permissions?:string;
 }

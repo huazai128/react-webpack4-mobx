@@ -4,7 +4,8 @@ import { TodoStore } from './TodoStore';
 import { RouterStore } from './RouterStore';
 import { LoginStore } from './LoginStore';
 import { HomeStore } from './HomeStore';
-import { STORE_TODO, STORE_ROUTER, STOER_LOGIN,STORE_HOME } from 'app/constans';
+import { Tag } from './TagStore';
+import { STORE_TODO, STORE_ROUTER, STOER_LOGIN,STORE_HOME,STOER_TAG } from 'app/constans';
 
 export const creactStore = (history: History, defaultTodos: TodoModel[]) => {
 	const todoStore = new TodoStore(defaultTodos);
@@ -16,5 +17,6 @@ export const creactStore = (history: History, defaultTodos: TodoModel[]) => {
 		[STORE_ROUTER]: routerStore,
 		[STOER_LOGIN]: loginStore,
 		[STORE_HOME]: homeStore,
+		[STOER_TAG]:Tag,
 	};
 }

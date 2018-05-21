@@ -4,7 +4,7 @@ import { HomeStore } from 'app/store';
 import { observer } from 'mobx-react';
 import { History } from 'history';
 import { toJS } from 'mobx';
-import * as style from './style.less';
+import './style.less';
 const TabPane = Tabs.TabPane;
 
 interface TabListsProps {
@@ -39,7 +39,7 @@ export class TabLists extends React.Component<TabListsProps, TabListsState>{
 					const { Component } = pane;
 					return (
 						<TabPane tab={pane.name} key={pane.path}>
-							<div className={ style.cont }>
+							<div className="cont">
 								{Component ? <Component></Component> : <div>暂无内容</div>}
 							</div>
 						</TabPane>
