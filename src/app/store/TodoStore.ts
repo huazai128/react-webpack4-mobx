@@ -20,8 +20,8 @@ export class TodoStore{
 
   @action
   addTodo = (item:Partial<TodoModel>):void => {
-    this.todos.push(new TodoModel(item.text, item.completed));
-  }
+		this.todos.push(new TodoModel(item.text, item.completed));
+	}
 
   @action
   clearCompleted = ():void => {
